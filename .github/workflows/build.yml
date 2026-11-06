@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y openjdk-17-jdk
-          echo "JAVA_HOME=$([ -d /usr/lib/jvm/java-17-openjdk-amd64 ] && echo /usr/lib/jvm/java-17-openjdk-amd64)" >> $GITHUB_ENV
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
 
       - name: Install Flutter
         run: |
@@ -27,8 +27,5 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk --release
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Show APK Path
+        run: ls -la build/app/outputs/flutter-apk/
