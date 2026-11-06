@@ -1,13 +1,16 @@
 name: Build APK
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
@@ -20,10 +23,14 @@ jobs:
         with:
           flutter-version: '3.x'
 
-      - run: flutter pub get
-      - run: flutter build apk --release
+      - name: Get Dependencies
+        run: flutter pub get
 
-      - uses: actions/upload-artifact@v3
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
