@@ -10,9 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone Repository
-        run: |
-          git clone https://github.com/pke1997/KsK-Memo.git .
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Set up Java
         run: |
