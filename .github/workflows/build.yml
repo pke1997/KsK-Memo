@@ -25,12 +25,10 @@ jobs:
           echo "$PWD/_flutter/bin" >> $GITHUB_PATH
 
       - name: Get Dependencies
-        run: flutter pub get
-        working-directory: KsK-Memo
+        run: flutter pub get --directory=KsK-Memo
 
       - name: Build APK
-        run: flutter build apk --release
-        working-directory: KsK-Memo
+        run: flutter build apk --release --directory=KsK-Memo
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
