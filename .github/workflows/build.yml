@@ -1,3 +1,4 @@
+
 name: Build APK
 
 on:
@@ -8,6 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: KsK-Memo
 
     steps:
       - name: Checkout Code
@@ -23,12 +27,13 @@ jobs:
         run: |
           git clone https://github.com/flutter/flutter.git --depth 1 -b stable _flutter
           echo "$PWD/_flutter/bin" >> $GITHUB_PATH
+        working-directory: .
 
       - name: Get Dependencies
-        run: flutter pub get --directory=KsK-Memo
+        run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release --directory=KsK-Memo
+        run: flutter build apk --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
